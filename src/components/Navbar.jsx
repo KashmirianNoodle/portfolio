@@ -21,7 +21,17 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
         {/* Logo */}
         <h1 className="text-primary font-bold text-lg tracking-wide">
+          <Link
+          to="/"
+          onClick={() => setIsOpen(false)}
+          className="
+            text-primary font-bold text-lg tracking-wide
+            hover:opacity-80 transition
+          "
+        >
           Mir Shafeeq
+        </Link>
+
         </h1>
 
         {/* Desktop Links */}
