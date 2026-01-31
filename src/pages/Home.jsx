@@ -2,15 +2,18 @@ import { motion } from "framer-motion";
 import Counter from "../components/Counter";
 import GlassCard from "../components/GlassCard";
 import { Link } from "react-router-dom";
+import { Download } from "lucide-react";
 import FloatingBadges from "../components/FloatingBadges";
-import EventQueue from "../components/EventQueue";
+// import EventQueue from "../components/EventQueue";
 
 export default function Home() {
   return (
     <section className="relative min-h-screen flex items-center py-20">
+      
       <FloatingBadges />
+
       {/* Glow Accent */}
-      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-primary/20 blur-[140px] rounded-full" />
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-primary/20 blur-[140px] rounded-full pointer-events-none" />
 
       <div className="relative w-full space-y-20">
 
@@ -42,6 +45,7 @@ export default function Home() {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
+
               <Link
                 to="/projects"
                 className="px-6 py-3 rounded-xl bg-primary text-black font-semibold hover:scale-105 transition"
@@ -55,6 +59,26 @@ export default function Home() {
               >
                 Contact Me
               </Link>
+
+              <a
+                href="/mir_shafeeq_resume.pdf"
+                download
+                className="
+                  px-6 py-3 rounded-xl
+                  border border-primary/30
+                  text-primary font-semibold
+                  hover:bg-primary/10
+                  hover:scale-105
+                  hover:shadow-[0_0_20px_rgba(0,255,198,0.3)]
+                  transition
+                  backdrop-blur-md
+                  flex items-center gap-2
+                "
+              >
+                <Download size={16} />
+                Download CV
+              </a>
+
             </div>
           </motion.div>
 
@@ -74,12 +98,12 @@ export default function Home() {
 
             <p className="text-green-400 mt-5">$ stack</p>
             <p className="text-white/80 leading-relaxed">
-              Node.js · TypeScript · Express · AWS · DynamoDB · PostgreSQL · Redis · GraphQL · WebSockets 
+              Node.js · TypeScript · Express · AWS · DynamoDB · PostgreSQL · Redis · GraphQL · WebSockets
             </p>
 
             <p className="text-green-400 mt-5">$ focus</p>
             <p className="text-white/80">
-              Distributed Systems · Event-Driven Architecture · Microservices · Auth · Caching · Serverless · REST
+              Distributed Systems · Event-Driven Architecture · Microservices · Auth · Caching · Serverless
             </p>
 
             <p className="mt-4 text-primary animate-pulse">▋</p>
@@ -110,15 +134,6 @@ export default function Home() {
             <Counter value={30} label="Test Coverage Increase (%)" />
           </GlassCard>
         </motion.div>
-        {/* ================= EVENT FLOW ================= */}
-        {/* <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="flex justify-center"
-        >
-          <EventQueue />
-        </motion.div> */}
 
       </div>
     </section>
