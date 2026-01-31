@@ -1,23 +1,42 @@
-import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-export default function Counter({ value, label }) {
-  const motionValue = useMotionValue(0);
-  const spring = useSpring(motionValue, {
-    stiffness: 40,
-    damping: 20,
-  });
+export default function Counter({ value = 0, label }) {
+  const [count, setCount] = useState(0);
 
   useEffect(() => {
-    motionValue.set(value);
-  }, []);
+    let start = 0;
+    const duration = 1500;
+    const increment = value / (duration / 16);
+
+    const counter = setInterval(() => {
+      start += increment;
+
+      if (start >= value) {
+        setCount(value);
+        clearInterval(counter);
+      } else {
+        setCount(Math.floor(start));
+      }
+    }, 16);
+
+    return () => clearInterval(counter);
+  }, [value]);
 
   return (
-    <div className="text-center">
-      <motion.h2 className="text-4xl font-bold text-primary">
-        {spring.get().toFixed(0)}
-      </motion.h2>
-      <p className="text-gray-400 mt-2">{label}</p>
+    <div className="text-center space-y-2">
+      <motion.h3
+        initial={{ scale: 0.9 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 0.3 }}
+        className="text-3xl font-bold text-primary"
+      >
+        {count}
+      </motion.h3>
+
+      <p className="text-xs text-white/60 uppercase tracking-wider">
+        {label}
+      </p>
     </div>
   );
 }

@@ -1,73 +1,124 @@
 import { motion } from "framer-motion";
 import Counter from "../components/Counter";
 import GlassCard from "../components/GlassCard";
+import { Link } from "react-router-dom";
+import FloatingBadges from "../components/FloatingBadges";
+import EventQueue from "../components/EventQueue";
 
 export default function Home() {
   return (
-    <section className="min-h-screen flex items-center">
-      <div className="w-full space-y-16">
+    <section className="relative min-h-screen flex items-center py-20">
+      <FloatingBadges />
+      {/* Glow Accent */}
+      <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-primary/20 blur-[140px] rounded-full" />
 
-        {/* ================= HERO / TERMINAL ================= */}
-        <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          className="
-            bg-black/50 border border-white/10
-            rounded-2xl p-6 md:p-8
-            code-font max-w-4xl
-          "
-        >
-          <p className="text-green-400">$ whoami</p>
-          <p className="text-lg md:text-xl">
-            Mir Shafeeq
-          </p>
+      <div className="relative w-full space-y-20">
 
-          <p className="text-green-400 mt-5">$ role</p>
-          <p>
-            Backend Developer
-          </p>
+        {/* ================= HERO SECTION ================= */}
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-          <p className="text-green-400 mt-5">$ stack</p>
-          <p className="text-white/80 leading-relaxed">
-            Node.js · TypeScript · Express · AWS (Lambda, API Gateway,
-            DynamoDB, SQS, SNS, Cognito) · PostgreSQL · Redis · WebSockets
-          </p>
-        </motion.div>
+          {/* LEFT SIDE */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-8"
+          >
+            <div className="space-y-4">
+              <p className="text-primary text-sm tracking-widest uppercase">
+                Backend Engineer
+              </p>
 
-        {/* ================= SUMMARY ================= */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          <GlassCard>
-            <p className="text-white/80 leading-relaxed max-w-4xl">
-              Backend developer with 3+ years of experience building
-              scalable, cloud-native systems. Strong focus on
-              distributed architectures, event-driven design,
-              authentication (AWS Cognito, MFA), caching, and
-              high-performance data layers in production environments.
+              <h1 className="text-4xl md:text-5xl font-bold leading-tight">
+                Hi, I'm <span className="text-primary">Mir Shafeeq</span>
+              </h1>
+
+              <p className="text-white/70 text-lg max-w-xl leading-relaxed">
+                I design scalable, event-driven backend systems with
+                high-performance data layers and secure authentication flows.
+                Focused on cloud-native architecture and production-grade reliability.
+              </p>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-wrap gap-4">
+              <Link
+                to="/projects"
+                className="px-6 py-3 rounded-xl bg-primary text-black font-semibold hover:scale-105 transition"
+              >
+                View Projects
+              </Link>
+
+              <Link
+                to="/contact"
+                className="px-6 py-3 rounded-xl border border-white/20 hover:border-primary transition"
+              >
+                Contact Me
+              </Link>
+            </div>
+          </motion.div>
+
+          {/* RIGHT SIDE - Terminal Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="
+              bg-black/50 border border-white/10
+              rounded-2xl p-6 md:p-8
+              code-font backdrop-blur-xl
+            "
+          >
+            <p className="text-green-400">$ whoami</p>
+            <p className="text-lg md:text-xl">Mir Shafeeq</p>
+
+            <p className="text-green-400 mt-5">$ stack</p>
+            <p className="text-white/80 leading-relaxed">
+              Node.js · TypeScript · Express · AWS · DynamoDB · PostgreSQL · Redis · GraphQL · WebSockets 
             </p>
-          </GlassCard>
-        </motion.div>
+
+            <p className="text-green-400 mt-5">$ focus</p>
+            <p className="text-white/80">
+              Distributed Systems · Event-Driven Architecture · Microservices · Auth · Caching · Serverless · REST
+            </p>
+
+            <p className="mt-4 text-primary animate-pulse">▋</p>
+          </motion.div>
+
+        </div>
 
         {/* ================= METRICS ================= */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          className="
-            grid gap-4
-            grid-cols-2
-            md:grid-cols-4
-          "
+          transition={{ delay: 0.4 }}
+          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
         >
-          <Counter value={60} label="Latency Reduced (%)" />
-          <Counter value={40} label="DB Read Improvement (%)" />
-          <Counter value={100} label="Capital Processed (Cr+ ₹)" />
-          <Counter value={30} label="Test Coverage Increase (%)" />
+          <GlassCard>
+            <Counter value={60} label="Latency Reduced (%)" />
+          </GlassCard>
+
+          <GlassCard>
+            <Counter value={40} label="DB Read Optimization (%)" />
+          </GlassCard>
+
+          <GlassCard>
+            <Counter value={100} label="Capital Processed (Cr+ ₹)" />
+          </GlassCard>
+
+          <GlassCard>
+            <Counter value={30} label="Test Coverage Increase (%)" />
+          </GlassCard>
         </motion.div>
+        {/* ================= EVENT FLOW ================= */}
+        {/* <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="flex justify-center"
+        >
+          <EventQueue />
+        </motion.div> */}
 
       </div>
     </section>

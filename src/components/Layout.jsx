@@ -3,14 +3,16 @@ import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./Navbar";
 import AnimatedBackground from "./AnimatedBackground";
 import WebGLBackground from "./WebGLBackground";
+import ArchitectureFlow from "./ArchitectureFlow";
 
 export default function Layout() {
   const location = useLocation();
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="cyber-grid relative min-h-screen overflow-hidden">
       <WebGLBackground />
       <AnimatedBackground />
+      <ArchitectureFlow />
       <Navbar />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-16">
