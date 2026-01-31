@@ -13,7 +13,7 @@ export default function Layout() {
       <AnimatedBackground />
       <Navbar />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-20">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-16">
         <AnimatePresence mode="sync">
           <motion.div
             key={location.pathname}

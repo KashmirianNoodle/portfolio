@@ -1,21 +1,17 @@
 import { motion } from "framer-motion";
 import { systemDesigns } from "../data/portfolioData";
+import PageHeader from "../components/PageHeader";
 
 export default function SystemDesign() {
   return (
-    <section className="min-h-screen py-16">
+    <section className="max-w-3xl mx-auto space-y-12">
       <div className="max-w-5xl mx-auto px-6 space-y-14">
 
         {/* Page Header */}
-        <div className="space-y-3">
-          <h2 className="text-3xl font-bold">
-            System Design
-          </h2>
-          <p className="text-white/65 max-w-2xl">
-            Selected system design work focused on scalability,
-            performance, and backend architecture decisions.
-          </p>
-        </div>
+        <PageHeader
+          title="System Design"
+          subtitle="Selected backend-focused designs emphasizing scalability, performance, and clean architecture."
+        />
 
         {/* Design Highlights */}
         <div className="space-y-6">

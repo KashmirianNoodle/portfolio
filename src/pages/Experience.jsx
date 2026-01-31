@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import PageWrapper from "../components/PageWrapper";
+import PageHeader from "../components/PageHeader";
 
 const experiences = [
   {
@@ -71,17 +72,19 @@ export default function Experience() {
 
   return (
     <PageWrapper>
-    <section className="min-h-screen py-16">
-      <div ref={ref} className="max-w-6xl mx-auto px-6">
+    <section >
+      <div ref={ref}>
         {/* Heading */}
-        <h2 className="text-4xl font-bold text-center mb-4">
-          Experience
-        </h2>
-        <p className="max-w-2xl mx-auto text-center text-white/70 mb-14">
-          Building scalable backend systems across startups, fintech,
-          and SaaS platforms.
-        </p>
+        <section className="pb-16">
+          <div >
+            <PageHeader
+              title="Experience"
+              subtitle="Building scalable backend systems across startups, fintech, and SaaS platforms."
+            />
 
+            {/* timeline stays the same */}
+          </div>
+        </section>
         {/* Timeline */}
         <div className="relative">
           {/* Base line */}

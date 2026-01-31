@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import PageWrapper from "../components/PageWrapper";
+import PageHeader from "../components/PageHeader";
 
 const skillGroups = [
   {
@@ -28,16 +29,16 @@ const container = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
-    transition: { staggerChildren: 0.12 }
+    transition: { staggerChildren: 0.1 }
   }
 };
 
 const card = {
-  hidden: { opacity: 0, y: 30 },
+  hidden: { opacity: 0, y: 24 },
   show: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5, ease: "easeOut" }
+    transition: { duration: 0.45, ease: "easeOut" }
   }
 };
 
@@ -45,38 +46,53 @@ function SkillCard({ group }) {
   return (
     <motion.div
       variants={card}
-      whileHover={{ y: -6, scale: 1.02 }}
-      transition={{ type: "spring", stiffness: 260, damping: 20 }}
+      whileHover={{ y: -6 }}
       className="
-        relative rounded-2xl p-6
+        group relative rounded-2xl p-6
         bg-white/5 backdrop-blur-xl
         border border-white/10
-        shadow-lg
         hover:border-cyan-400/40
-        hover:shadow-cyan-500/20
+        transition
       "
     >
-      <div className="flex items-center gap-3 mb-4">
-        <span className="text-2xl">{group.icon}</span>
+      {/* Header */}
+      <div className="flex items-center gap-4 mb-5">
+        <div
+          className="
+            flex h-10 w-10 items-center justify-center
+            rounded-xl bg-cyan-500/10
+            text-xl
+            group-hover:scale-110
+            transition
+          "
+        >
+          {group.icon}
+        </div>
+
         <h3 className="text-lg font-semibold tracking-wide">
           {group.title}
         </h3>
       </div>
 
+      {/* Skills */}
       <ul className="flex flex-wrap gap-2">
         {group.skills.map(skill => (
-          <li
+          <motion.li
             key={skill}
+            whileHover={{ y: -2, scale: 1.05 }}
             className="
-              px-3 py-1 text-sm rounded-full
+              px-3 py-1.5 text-sm rounded-full
               bg-black/40
               border border-white/10
               text-white/80
               hover:border-cyan-400/40
+              hover:text-white
+              transition
+              cursor-default
             "
           >
             {skill}
-          </li>
+          </motion.li>
         ))}
       </ul>
     </motion.div>
@@ -86,42 +102,43 @@ function SkillCard({ group }) {
 export default function Skills() {
   return (
     <PageWrapper>
-    <section className="min-h-screen flex items-center">
-      <motion.div
-        className="max-w-6xl mx-auto px-6 w-full"
-        variants={container}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, margin: "-100px" }}
-      >
-        {/* Heading */}
-        <motion.h2
-          variants={card}
-          className="text-4xl font-bold text-center mb-4"
-        >
-          Skills
-        </motion.h2>
-
-        {/* Subtext */}
-        <motion.p
-          variants={card}
-          className="max-w-2xl mx-auto text-center text-white/70 mb-14"
-        >
-          A focused toolkit shaped by building real products —
-          optimized for performance, scalability, and clean architecture.
-        </motion.p>
-
-        {/* Grid */}
+      <section>
         <motion.div
+          // className="max-w-6xl mx-auto px-6"
+          className="max-w-3xl mx-auto space-y-12"
           variants={container}
-          className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
         >
-          {skillGroups.map(group => (
-            <SkillCard key={group.title} group={group} />
-          ))}
+      <section>
+        <div>
+
+          <PageHeader
+            title="Skills"
+            subtitle="A focused toolkit shaped by shipping production systems — optimized for performance, scalability, and reliability."
+          />
+
+          {/* grid stays the same */}
+        </div>
+      </section>
+
+          {/* Grid */}
+          <motion.div
+            variants={container}
+            className="
+                grid gap-6
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-4
+              "
+          >
+            {skillGroups.map(group => (
+              <SkillCard key={group.title} group={group} />
+            ))}
+          </motion.div>
         </motion.div>
-      </motion.div>
-    </section>
+      </section>
     </PageWrapper>
   );
 }

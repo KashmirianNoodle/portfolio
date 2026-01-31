@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import PageWrapper from "../components/PageWrapper";
+import PageHeader from "../components/PageHeader";
 
 const achievements = [
   {
@@ -40,16 +41,10 @@ export default function Achievements() {
       <div className="max-w-4xl mx-auto space-y-14">
 
         {/* Header */}
-        <div className="space-y-3">
-          <h2 className="text-3xl font-bold text-primary">
-            Key Achievements
-          </h2>
-          <p className="text-white/65 max-w-2xl">
-            Measurable impact delivered across performance,
-            scalability, reliability, and cost optimization.
-          </p>
-        </div>
-
+        <PageHeader
+          title="Key Achievements"
+          subtitle="Measurable impact across performance, scalability, reliability, and cost optimization."
+/>
         {/* Stacked Achievements */}
         <div className="space-y-6">
           {achievements.map((item, index) => (

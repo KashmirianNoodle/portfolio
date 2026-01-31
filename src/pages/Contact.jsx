@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Mail, Github, Linkedin, Phone } from "lucide-react";
 import PageWrapper from "../components/PageWrapper";
 import { personalInfo } from "../data/portfolioData";
+import PageHeader from "../components/PageHeader";
 
 const EMAIL_SUBJECT = encodeURIComponent("Hello — Let's Connect");
 const EMAIL_BODY = encodeURIComponent(
@@ -14,15 +15,10 @@ export default function Contact() {
       <div className="max-w-3xl mx-auto space-y-12">
 
         {/* Header */}
-        <div className="space-y-3">
-          <h2 className="text-3xl font-bold text-primary">
-            Contact
-          </h2>
-          <p className="text-white/65 max-w-xl">
-            Open to backend roles, system design discussions,
-            or collaborating on interesting products.
-          </p>
-        </div>
+        <PageHeader
+        title="Contact"
+        subtitle="Open to backend roles, system design discussions, or collaborating on interesting products."
+      />
 
         {/* Contact Cards */}
         <div className="grid gap-4 sm:grid-cols-2">

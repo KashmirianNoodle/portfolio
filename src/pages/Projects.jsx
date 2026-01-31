@@ -1,3 +1,4 @@
+import PageHeader from "../components/PageHeader";
 import PageWrapper from "../components/PageWrapper";
 import ProjectCard from "../components/ProjectCard";
 import { projects } from "../data/portfolioData";
@@ -9,12 +10,20 @@ export default function Projects() {
       <motion.h2
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="text-3xl font-bold text-primary mb-12"
+        className="mb-12"
       >
-        Engineering Projects
+      <PageHeader
+        title="Projects"
+        subtitle="A selection of production-grade engineering work and side projects."
+      />
+
       </motion.h2>
 
-      <div className="grid md:grid-cols-2 gap-8">
+        <div className="
+          grid gap-6
+          grid-cols-1
+          md:grid-cols-2
+        ">
         {projects.map((project, index) => (
           <ProjectCard
             key={index}
