@@ -3,17 +3,23 @@ import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./Navbar";
 import AnimatedBackground from "./AnimatedBackground";
 import WebGLBackground from "./WebGLBackground";
-import ArchitectureFlow from "./ArchitectureFlow";
+import ArchitectureFlow from "./ArchitectureFlow"
 
 export default function Layout() {
   const location = useLocation();
 
   return (
-    <div className="cyber-grid relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-black">
+
       <WebGLBackground />
       <AnimatedBackground />
-      <ArchitectureFlow />
+    <div className="absolute inset-0 z-20 pointer-events-none">
+        <ArchitectureFlow />
+      </div>
       <Navbar />
+
+      {/* Ambient Glow */}
+      <div className="absolute -top-60 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/20 blur-[160px] rounded-full pointer-events-none" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-6 pt-28 pb-16">
         <AnimatePresence mode="sync">
@@ -31,3 +37,4 @@ export default function Layout() {
     </div>
   );
 }
+

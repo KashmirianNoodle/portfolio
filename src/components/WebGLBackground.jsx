@@ -89,7 +89,7 @@ function Network() {
 
 export default function WebGLBackground() {
   return (
-    <div className="fixed inset-0 -z-30 opacity-40 pointer-events-none">
+    <div className="fixed inset-0 -z-40 opacity-30 pointer-events-none">
       <Canvas camera={{ position: [0, 0, 8] }}>
         <ambientLight intensity={0.5} />
         <pointLight position={[10, 10, 10]} />

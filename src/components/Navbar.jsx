@@ -17,22 +17,21 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-card/80 backdrop-blur-lg border-b border-slate-700 fixed w-full z-50">
+    <nav className="bg-black/80 backdrop-blur-lg border-b border-primary/10 fixed w-full z-50">
       <div className="max-w-6xl mx-auto px-6 md:px-12 py-4 flex justify-between items-center">
+
         {/* Logo */}
-        <h1 className="text-primary font-bold text-lg tracking-wide">
-          <Link
+        <Link
           to="/"
           onClick={() => setIsOpen(false)}
           className="
             text-primary font-bold text-lg tracking-wide
-            hover:opacity-80 transition
+            hover:drop-shadow-[0_0_10px_rgba(0,255,198,0.6)]
+            transition
           "
         >
           Mir Shafeeq
         </Link>
-
-        </h1>
 
         {/* Desktop Links */}
         <div className="hidden md:flex space-x-8 text-sm text-gray-300">
@@ -68,7 +67,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.25 }}
-            className="md:hidden bg-card border-t border-slate-700"
+            className="md:hidden bg-black border-t border-primary/10"
           >
             <div className="flex flex-col px-6 py-4 space-y-4 text-gray-300">
               {navLinks.map((link) => (
