@@ -7,7 +7,9 @@ import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 import SystemDesign from "./pages/SystemDesign";
-import Achievements from "./pages/Achievements"
+import Achievements from "./pages/Achievements";
+// import PremiumFeaturesDemo from './pages/PremiumFeaturesDemo';
+// import AnalyticsDashboard from "./pages/AnalyticsDashboard";
 
 export default function App() {
   const location = useLocation();
@@ -23,6 +25,7 @@ export default function App() {
           <Route path="/achievements" element={<Achievements />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/contact" element={<Contact />} />
+          {/* <Route path="/example" element={<AnalyticsDashboard/>} /> */}
         </Route>
       </Routes>
     </AnimatePresence>

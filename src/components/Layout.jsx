@@ -12,12 +12,18 @@ export default function Layout() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
 
-      <MatrixRain />
       <WebGLBackground />
       <AnimatedBackground />
     <div className="absolute inset-0 z-20 pointer-events-none">
-        <ArchitectureFlow />
+        {/* <ArchitectureFlow /> */}
+      {/* <MatrixRain /> */}
       </div>
+
+      {/* Interactive Particle Background */}
+      {/* <div className="fixed inset-0 pointer-events-none opacity-30 z-0">
+        <InteractiveParticles particleCount={1500} showConnections={true} />
+      </div> */}
+
       <Navbar />
       {/* Ambient Glow */}
       <div className="absolute -top-60 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/20 blur-[160px] rounded-full pointer-events-none" />

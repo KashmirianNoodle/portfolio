@@ -6,12 +6,14 @@ import { Download } from "lucide-react";
 import FloatingBadges from "../components/FloatingBadges";
 // import EventQueue from "../components/EventQueue";
 import TerminalTyping from './../components/TerminalTyping';
+import MatrixRain from "../components/MatrixRain";
 
 export default function Home() {
   return (
     <section className="relative min-h-screen flex items-center py-20">
       <FloatingBadges />
-
+       
+       <MatrixRain />
       {/* Glow Accent */}
       <div className="absolute -top-40 -left-40 w-[500px] h-[500px] bg-primary/20 blur-[140px] rounded-full pointer-events-none" />
 

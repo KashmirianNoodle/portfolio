@@ -14,6 +14,7 @@ export default function Navbar() {
     { name: "Achievements", path: "/achievements" },
     { name: "Skills", path: "/skills" },
     { name: "Contact", path: "/contact" },
+    // { name: "example", path: '/example'}
   ];
 
   return (
