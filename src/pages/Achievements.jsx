@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import PageWrapper from "../components/PageWrapper";
 import PageHeader from "../components/PageHeader";
+import WebGLBackground from "../components/WebGLBackground";
 
 const achievements = [
   {
@@ -38,6 +39,7 @@ const achievements = [
 export default function Achievements() {
   return (
     <PageWrapper>
+            <WebGLBackground />
       <div className="max-w-4xl mx-auto space-y-14">
 
         {/* Header */}

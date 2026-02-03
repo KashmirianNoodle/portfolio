@@ -3,17 +3,17 @@ import { Mail, Github, Linkedin, Phone } from "lucide-react";
 import PageWrapper from "../components/PageWrapper";
 import { personalInfo } from "../data/portfolioData";
 import PageHeader from "../components/PageHeader";
+import WebGLBackground from "../components/WebGLBackground";
 
 const EMAIL_SUBJECT = encodeURIComponent("Hello — Let's Connect");
 const EMAIL_BODY = encodeURIComponent(
   "Hi,\n\nI came across your portfolio and wanted to reach out.\n\nThanks!"
 );
-
 export default function Contact() {
   return (
     <PageWrapper>
+        <WebGLBackground />
       <div className="max-w-3xl mx-auto space-y-12">
-
         {/* Header */}
         <PageHeader
         title="Contact"

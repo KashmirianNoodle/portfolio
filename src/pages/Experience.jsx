@@ -2,6 +2,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import PageWrapper from "../components/PageWrapper";
 import PageHeader from "../components/PageHeader";
+import WebGLBackground from "../components/WebGLBackground";
 
 const experiences = [
   {
@@ -72,6 +73,7 @@ export default function Experience() {
 
   return (
     <PageWrapper>
+      <WebGLBackground />
     <section >
       <div ref={ref}>
         {/* Heading */}

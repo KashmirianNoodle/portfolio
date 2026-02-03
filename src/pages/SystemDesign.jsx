@@ -1,18 +1,19 @@
 import { motion } from "framer-motion";
 import { systemDesigns } from "../data/portfolioData";
 import PageHeader from "../components/PageHeader";
+import WebGLBackground from "../components/WebGLBackground";
 
 export default function SystemDesign() {
   return (
     <section className="max-w-3xl mx-auto space-y-12">
       <div className="max-w-5xl mx-auto px-6 space-y-14">
-
         {/* Page Header */}
         <PageHeader
           title="System Design"
           subtitle="Selected backend-focused designs emphasizing scalability, performance, and clean architecture."
         />
 
+      <WebGLBackground />
         {/* Design Highlights */}
         <div className="space-y-6">
           <h3 className="text-xl font-semibold text-white/90">

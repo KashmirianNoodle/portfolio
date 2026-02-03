@@ -1,12 +1,14 @@
 import PageHeader from "../components/PageHeader";
 import PageWrapper from "../components/PageWrapper";
 import ProjectCard from "../components/ProjectCard";
+import WebGLBackground from "../components/WebGLBackground";
 import { projects } from "../data/portfolioData";
 import { motion } from "framer-motion";
 
 export default function Projects() {
   return (
     <PageWrapper>
+      <WebGLBackground />
       <motion.h2
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

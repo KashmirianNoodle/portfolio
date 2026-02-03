@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import PageWrapper from "../components/PageWrapper";
 import PageHeader from "../components/PageHeader";
+import WebGLBackground from "../components/WebGLBackground";
 
 const skillGroups = [
   {
@@ -158,6 +159,7 @@ function SkillCard({ group }) {
 export default function Skills() {
   return (
     <PageWrapper>
+      <WebGLBackground />
       <section className="relative">
 
         {/* subtle background glow */}
