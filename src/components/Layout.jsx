@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import AnimatedBackground from "./AnimatedBackground";
 import WebGLBackground from "./WebGLBackground";
 import ArchitectureFlow from "./ArchitectureFlow"
+import MatrixRain from './MatrixRain';
 
 export default function Layout() {
   const location = useLocation();
@@ -11,13 +12,13 @@ export default function Layout() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
 
+      <MatrixRain />
       <WebGLBackground />
       <AnimatedBackground />
     <div className="absolute inset-0 z-20 pointer-events-none">
         <ArchitectureFlow />
       </div>
       <Navbar />
-
       {/* Ambient Glow */}
       <div className="absolute -top-60 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-primary/20 blur-[160px] rounded-full pointer-events-none" />
 

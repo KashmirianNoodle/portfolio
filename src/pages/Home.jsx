@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import { Download } from "lucide-react";
 import FloatingBadges from "../components/FloatingBadges";
 // import EventQueue from "../components/EventQueue";
+import TerminalTyping from './../components/TerminalTyping';
 
 export default function Home() {
   return (
     <section className="relative min-h-screen flex items-center py-20">
-      
       <FloatingBadges />
 
       {/* Glow Accent */}
@@ -93,7 +93,8 @@ export default function Home() {
               code-font backdrop-blur-xl
             "
           >
-            <p className="text-green-400">$ whoami</p>
+            <TerminalTyping />
+            {/* <p className="text-green-400">$ whoami</p>
             <p className="text-lg md:text-xl">Mir Shafeeq</p>
 
             <p className="text-green-400 mt-5">$ stack</p>
@@ -106,7 +107,7 @@ export default function Home() {
               Distributed Systems · Event-Driven Architecture · Microservices · Auth · Caching · Serverless
             </p>
 
-            <p className="mt-4 text-primary animate-pulse">▋</p>
+            <p className="mt-4 text-primary animate-pulse">▋</p> */}
           </motion.div>
 
         </div>
