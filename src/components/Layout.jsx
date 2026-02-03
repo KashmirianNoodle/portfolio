@@ -3,9 +3,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./Navbar";
 import AnimatedBackground from "./AnimatedBackground";
 import WebGLBackground from "./WebGLBackground";
-import ArchitectureFlow from "./ArchitectureFlow"
-import MatrixRain from './MatrixRain';
-
+// import ArchitectureFlow from "./ArchitectureFlow"
+// import MatrixRain from './MatrixRain';
+// import WhatsAppWidget from "./WhatsAppWidget";
+// import AIExperienceChatbot from "./AIExperienceChatbot";
+import ExperienceChatbot from "./ExperienceChatbot";
 export default function Layout() {
   const location = useLocation();
 
@@ -14,6 +16,8 @@ export default function Layout() {
 
       <WebGLBackground />
       <AnimatedBackground />
+      <ExperienceChatbot minimal />
+      {/* <WhatsAppWidget phoneNumber={'+919596973984'}/> */}
     <div className="absolute inset-0 z-20 pointer-events-none">
         {/* <ArchitectureFlow /> */}
       {/* <MatrixRain /> */}
