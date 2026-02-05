@@ -138,6 +138,14 @@ export default function ExperienceChatbot({ className = '', minimal = false }) {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    if (minimal && isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [minimal, isOpen]);
+
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
@@ -202,8 +210,14 @@ export default function ExperienceChatbot({ className = '', minimal = false }) {
     <motion.div
       layout
       className={`
-        ${minimal 
-          ? 'fixed bottom-6 right-6 z-50 w-96 h-[600px]' 
+        ${minimal
+          ? `
+            fixed z-50
+            bottom-0 right-0
+            w-full h-[85vh]
+            sm:bottom-6 sm:right-6
+            sm:w-[380px] sm:h-[600px]
+          `
           : className
         }
         flex flex-col
@@ -212,8 +226,17 @@ export default function ExperienceChatbot({ className = '', minimal = false }) {
         border-2 border-primary/30
         shadow-2xl
       `}
-      initial={minimal ? { scale: 0, opacity: 0 } : {}}
-      animate={minimal ? { scale: 1, opacity: 1 } : {}}
+        initial={
+          minimal
+            ? { y: 100, opacity: 0 }
+            : {}
+        }
+        animate={
+          minimal
+            ? { y: 0, opacity: 1 }
+            : {}
+        }
+        transition={{ type: "spring", stiffness: 260, damping: 20 }}
     >
       {/* Header */}
       <div className="bg-gradient-to-r from-primary/20 to-blue-500/20 backdrop-blur-xl border-b border-white/10 p-4">
