@@ -32,63 +32,72 @@ export const useVisitorTracking = () => {
   const [allVisitors, setAllVisitors] = useState([]);
   const [visitorInfo, setVisitorInfo] = useState(null);
 
-useEffect(() => {
-  const init = async () => {
-    try {
-      const { getVisitorId } = await import("../lib/visitorId.js");
-      const visitor_id = await getVisitorId();
-
-      // Wrap meta separately so a blocked ipapi never kills the upsert
-      let meta = { country: "Unknown", city: "Unknown", region: "Unknown", ip: "Unknown", org: "Unknown", timezone: "Unknown" };
+  useEffect(() => {
+    const init = async () => {
       try {
-        meta = await getVisitorMeta();
-      } catch {
-        // ipapi blocked or failed — continue with defaults
+        const { getVisitorId } = await import("../lib/visitorId.js");
+        const visitor_id = await getVisitorId();
+
+        let meta = { country: "Unknown", city: "Unknown", region: "Unknown", ip: "Unknown", org: "Unknown", timezone: "Unknown" };
+        try {
+          meta = await getVisitorMeta();
+        } catch {
+          // ipapi blocked or failed — continue with defaults
+        }
+
+        const { device, browser, os } = getDeviceInfo();
+
+        const now = new Date().toISOString(); // ✅ always UTC
+
+        const info = {
+          visitor_id,
+          ...meta,
+          device,
+          browser,
+          os,
+          page: window.location.pathname,
+          referrer: document.referrer || "Direct",
+          screen: `${window.screen.width}x${window.screen.height}`,
+          last_seen: now,
+          first_seen: now,
+        };
+
+        setVisitorInfo(info);
+
+        const { error } = await supabase.from("visitors").upsert(
+          info,
+          { onConflict: "visitor_id", ignoreDuplicates: false }
+        );
+
+        if (error) console.error("Upsert failed:", error);
+
+      } catch (e) {
+        console.error("Visitor tracking init failed:", e);
       }
-
-      const { device, browser, os } = getDeviceInfo();
-
-      const info = {
-        visitor_id,
-        ...meta,
-        device,
-        browser,
-        os,
-        page: window.location.pathname,
-        referrer: document.referrer || "Direct",
-        screen: `${window.screen.width}x${window.screen.height}`,
-        last_seen: new Date(),
-        first_seen: new Date(),
-      };
-
-      setVisitorInfo(info);
-
-      const { error } = await supabase.from("visitors").upsert(
-        info,
-        { onConflict: "visitor_id", ignoreDuplicates: false }
-      );
-
-      if (error) console.error("Upsert failed:", error);
-
-    } catch (e) {
-      console.error("Visitor tracking init failed:", e);
-    }
-  };
-  init();
-}, []);
+    };
+    init();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
       const visitor_id = localStorage.getItem("visitor_id");
       if (!visitor_id) return;
-      await supabase.from("visitors").update({ last_seen: new Date(), page: window.location.pathname })
+      await supabase
+        .from("visitors")
+        .update({
+          last_seen: new Date().toISOString(), // ✅ always UTC
+          page: window.location.pathname
+        })
         .eq("visitor_id", visitor_id);
     }, 10000);
     return () => clearInterval(interval);
   }, []);
 
   const fetchVisitors = async () => {
-    const { data } = await supabase.from("visitors").select("*").order("last_seen", { ascending: false });
+    const { data } = await supabase
+      .from("visitors")
+      .select("*")
+      .order("last_seen", { ascending: false });
     if (!data) return;
     const now = Date.now();
     setAllVisitors(data);

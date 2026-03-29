@@ -1,15 +1,41 @@
 import { useEffect, useState } from "react";
-import { useVisitorTracking } from "../hooks/useVisitorTracking";
+import { supabase } from "../lib/supabaseClient";
+
+const ACTIVE_WINDOW = 5 * 60 * 1000;
 
 export default function Dashboard() {
   const [authorized, setAuthorized] = useState(false);
   const [activeTab, setActiveTab] = useState("active");
-  const { visitors, allVisitors } = useVisitorTracking();
+  const [allVisitors, setAllVisitors] = useState([]);
+  const [visitors, setVisitors] = useState([]);
 
   useEffect(() => {
     const password = prompt("Enter dashboard key");
     setAuthorized(password === import.meta.env.VITE_DASHBOARD_KEY);
   }, []);
+
+  const fetchVisitors = async () => {
+    const { data } = await supabase
+      .from("visitors")
+      .select("*")
+      .order("last_seen", { ascending: false });
+    if (!data) return;
+    const now = Date.now();
+    setAllVisitors(data);
+    setVisitors(data.filter((v) => now - new Date(v.last_seen).getTime() < ACTIVE_WINDOW));
+  };
+
+  useEffect(() => {
+    if (!authorized) return;
+    fetchVisitors();
+
+    const channel = supabase
+      .channel("dashboard-visitors")
+      .on("postgres_changes", { event: "*", schema: "public", table: "visitors" }, fetchVisitors)
+      .subscribe();
+
+    return () => supabase.removeChannel(channel);
+  }, [authorized]);
 
   if (!authorized) {
     return (
@@ -19,7 +45,6 @@ export default function Dashboard() {
     );
   }
 
-  // Metrics
   const countBy = (arr, key) =>
     arr.reduce((acc, v) => {
       const val = v[key] || "Unknown";
@@ -66,7 +91,6 @@ export default function Dashboard() {
     <div className="min-h-screen bg-black text-white p-6 font-mono">
       <h1 className="text-2xl font-bold mb-6">📊 Visitor Dashboard</h1>
 
-      {/* Summary cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         {[
           { label: "🟢 Active Now", value: visitors.length },
@@ -81,7 +105,6 @@ export default function Dashboard() {
         ))}
       </div>
 
-      {/* Metric breakdowns */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         <MetricCard title="Top Countries" entries={topEntries(countryStats)} />
         <MetricCard title="Top Pages" entries={topEntries(pageStats)} />
@@ -90,7 +113,6 @@ export default function Dashboard() {
         <MetricCard title="OS" entries={topEntries(osStats)} />
       </div>
 
-      {/* Visitor table */}
       <div className="bg-gray-900 border border-gray-800 rounded-xl p-4">
         <div className="flex gap-4 mb-4">
           {["active", "all"].map((tab) => (

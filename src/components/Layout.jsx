@@ -8,9 +8,12 @@ import WebGLBackground from "./WebGLBackground";
 // import WhatsAppWidget from "./WhatsAppWidget";
 // import AIExperienceChatbot from "./AIExperienceChatbot";
 import ExperienceChatbot from "./ExperienceChatbot";
+import { useVisitorTracking } from "../hooks/useVisitorTracking"; 
+
 export default function Layout() {
   const location = useLocation();
-
+  useVisitorTracking(); 
+  
   return (
     <div className="relative min-h-screen overflow-hidden bg-black">
 
