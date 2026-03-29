@@ -8,6 +8,7 @@ import Skills from "./pages/Skills";
 import Contact from "./pages/Contact";
 import SystemDesign from "./pages/SystemDesign";
 import Achievements from "./pages/Achievements";
+import Dashboard from "./pages/Dashboard";
 // import InteractiveFeaturesShowcase from "./pages/InteractiveFeaturesShowcase";
 // import PremiumFeaturesDemo from './pages/PremiumFeaturesDemo';
 // import AnalyticsDashboard from "./pages/AnalyticsDashboard";
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/achievements" element={<Achievements />} />
           <Route path="/skills" element={<Skills />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/internal-dashboard-2524" element={<Dashboard />} />
           {/* <Route path="/example" element={<InteractiveFeaturesShowcase/>} /> */}
         </Route>
       </Routes>
