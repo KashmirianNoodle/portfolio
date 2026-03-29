@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabaseClient";
 import { getVisitorMeta } from "../lib/geo.js";
 
-const ACTIVE_WINDOW = 30 * 1000;
+const ACTIVE_WINDOW = 5 * 60 * 1000;
 
 const getDeviceInfo = () => {
   const ua = navigator.userAgent;
