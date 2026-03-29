@@ -32,11 +32,20 @@ export const useVisitorTracking = () => {
   const [allVisitors, setAllVisitors] = useState([]);
   const [visitorInfo, setVisitorInfo] = useState(null);
 
-  useEffect(() => {
-    const init = async () => {
+useEffect(() => {
+  const init = async () => {
+    try {
       const { getVisitorId } = await import("../lib/visitorId.js");
       const visitor_id = await getVisitorId();
-      const meta = await getVisitorMeta();
+
+      // Wrap meta separately so a blocked ipapi never kills the upsert
+      let meta = { country: "Unknown", city: "Unknown", region: "Unknown", ip: "Unknown", org: "Unknown", timezone: "Unknown" };
+      try {
+        meta = await getVisitorMeta();
+      } catch {
+        // ipapi blocked or failed — continue with defaults
+      }
+
       const { device, browser, os } = getDeviceInfo();
 
       const info = {
@@ -54,13 +63,19 @@ export const useVisitorTracking = () => {
 
       setVisitorInfo(info);
 
-      await supabase.from("visitors").upsert(
+      const { error } = await supabase.from("visitors").upsert(
         info,
         { onConflict: "visitor_id", ignoreDuplicates: false }
       );
-    };
-    init();
-  }, []);
+
+      if (error) console.error("Upsert failed:", error);
+
+    } catch (e) {
+      console.error("Visitor tracking init failed:", e);
+    }
+  };
+  init();
+}, []);
 
   useEffect(() => {
     const interval = setInterval(async () => {
